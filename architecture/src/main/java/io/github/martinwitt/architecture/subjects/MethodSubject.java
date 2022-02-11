@@ -9,4 +9,10 @@ public class MethodSubject extends AbstractSubject<CtMethod<?>>
     public MethodSubject(CtModel model, CtMethod<?> element) {
         super(model, element);
     }
+
+    @Override
+    public MethodSubject not() {
+        negate = !negate;
+        return this;
+    }
 }
