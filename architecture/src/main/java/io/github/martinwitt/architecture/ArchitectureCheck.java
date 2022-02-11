@@ -1,5 +1,6 @@
 package io.github.martinwitt.architecture;
 
+import io.github.martinwitt.architecture.ArchitectureCheck.ModelBuilder;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -10,7 +11,6 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
-import io.github.martinwitt.architecture.ArchitectureCheck.ModelBuilder;
 import spoon.Launcher;
 import spoon.OutputType;
 import spoon.reflect.CtModel;
