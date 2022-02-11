@@ -4,7 +4,7 @@ import io.github.martinwitt.architecture.Failure;
 import java.util.function.Predicate;
 import spoon.reflect.declaration.CtElement;
 
-public abstract class AbstractSubject<T extends CtElement> {
+public abstract class AbstractSubject<T extends CtElement> implements ISubject<T> {
 
     protected T element;
 
@@ -22,7 +22,7 @@ public abstract class AbstractSubject<T extends CtElement> {
         }
     }
 
-    void is(Predicate<T> condition, String exptectedValue, String actualValue) {
+    public void is(Predicate<T> condition, String exptectedValue, String actualValue) {
         if (condition.negate().test(element)) {
             StackWalker walker = StackWalker.getInstance();
             String checkMethod = walker.walk(frames -> frames.map(StackWalker.StackFrame::getMethodName)
@@ -35,5 +35,10 @@ public abstract class AbstractSubject<T extends CtElement> {
 
     protected void failWithMessage(String message) {
         throw new AssertionError(message);
+    }
+
+    @Override
+    public T getElement() {
+        return element;
     }
 }

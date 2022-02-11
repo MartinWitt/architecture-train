@@ -3,32 +3,30 @@ package io.github.martinwitt.architecture;
 import io.github.martinwitt.architecture.subjects.MethodSubject;
 import java.util.ArrayList;
 import java.util.List;
-import spoon.reflect.CtModel;
 import spoon.reflect.declaration.CtMethod;
 
 public class Architecture {
 
-    private static List<FailureCollector> extensions = new ArrayList<>();
+    private static List<AbstractFailureCollector> extensions = new ArrayList<>();
 
     private Architecture() {}
 
-    public static void registerExtension(FailureCollector extension) {
+    public static void registerExtension(AbstractFailureCollector extension) {
         extensions.add(extension);
     }
 
-    public static void removeExtension(FailureCollector extension) {
+    public static void removeExtension(AbstractFailureCollector extension) {
         extensions.add(extension);
     }
 
     public static void raiseFailure(Failure failure) {
-        for (FailureCollector extension : extensions) {
+        for (AbstractFailureCollector extension : extensions) {
             extension.raiseFailure(failure);
         }
     }
 
-    public static MethodSubject assertThat(ElementSelection<CtMethod<?>> selection) {
-        CtModel model = null;
-        return new MethodSubject(selection.select(model).iterator().next());
+    public static MethodSubject assertThat(CtMethod<?> method) {
+        return new MethodSubject(method);
     }
 
     public static void clearExtensions() {

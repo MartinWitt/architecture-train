@@ -1,35 +1,19 @@
 package io.github.martinwitt.architecture;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.jupiter.api.extension.AfterEachCallback;
-import org.junit.jupiter.api.extension.BeforeEachCallback;
-import org.junit.jupiter.api.extension.ExtensionContext;
-
-public class FailureCollector implements BeforeEachCallback, AfterEachCallback {
-
-    private List<Failure> failures;
+public class FailureCollector extends AbstractFailureCollector {
 
     @Override
-    public void afterEach(ExtensionContext context) throws Exception {
-        if (!failures.isEmpty()) {
-            for (Failure failure : failures) {
-                System.err.println(failure);
-            }
-            Architecture.removeExtension(this);
-            throw new ArchitectureFailure(failures.size() + " failure(s) found");
-        }
-        System.out.println("No failures");
+    protected void logFailure(Failure failure) {
+        System.err.println(failure);
     }
 
     @Override
-    public void beforeEach(ExtensionContext context) throws Exception {
-        failures = new ArrayList<>();
-        System.out.println("Registering failure collector");
-        Architecture.registerExtension(this);
+    protected void afterAllFailures() {
+        throw new ArchitectureFailure(failures.size() + " failure(s) found");
     }
 
-    public void raiseFailure(Failure failure) {
-        failures.add(failure);
+    @Override
+    protected void logSuccess() {
+        System.out.println("No failures found");
     }
 }
