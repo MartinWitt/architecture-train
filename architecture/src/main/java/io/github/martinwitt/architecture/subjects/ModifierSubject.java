@@ -17,7 +17,7 @@ public interface ModifierSubject<T extends CtModifiable> extends ISubject<T> {
      *
      */
     public default void isProtected() {
-        is(e -> e.getVisibility() == ModifierKind.PUBLIC, getVisibility(getElement()), "protected");
+        is(e -> e.getVisibility() == ModifierKind.PROTECTED, getVisibility(getElement()), "protected");
     }
 
     /**
