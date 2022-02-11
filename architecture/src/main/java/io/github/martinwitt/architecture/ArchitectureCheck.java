@@ -1,8 +1,10 @@
 package io.github.martinwitt.architecture;
 
 import io.github.martinwitt.architecture.ArchitectureCheck.ModelBuilder;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -16,7 +18,7 @@ import spoon.reflect.CtModel;
 @Retention(RetentionPolicy.RUNTIME)
 @ExtendWith(FailureCollector.class)
 @ExtendWith(ModelBuilder.class)
-// @Target({ElementType.METHOD})
+@Target({ElementType.METHOD})
 @Test
 public @interface ArchitectureCheck {
 
