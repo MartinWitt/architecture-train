@@ -5,16 +5,18 @@ plugins {
 
 repositories {
 	mavenCentral()
+	maven { url 'https://repository.ow2.org/nexus/content/repositories/snapshots/' }
 }
 
 dependencies {
+	implementation 'fr.inria.gforge.spoon:spoon-core:10.0.1-SNAPSHOT'
+	implementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
 }
 
 testing {
 	suites {
-
 		test {
-			useJUnitJupiter('5.7.2')
+			useJUnitJupiter('5.8.2')
 		}
 	}
 }
@@ -34,4 +36,14 @@ spotless {
 		target '*.gradle' // default target of groovyGradle
 		greclipse()
 	}
+}
+jar {
+	manifest {
+		// attributes "Main-Class": "xyz.keksdose.spoon.code_solver.TransformationEngine"
+	}
+	from {
+		configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+	}
+	exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
