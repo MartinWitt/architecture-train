@@ -8,6 +8,10 @@ public interface NamedElementSubject<T extends CtNamedElement> extends ISubject<
     //   is(e -> e.getSimpleName().equals(name));
     // }
 
+    /**
+     * Checks that simple name of this element matches the given regex.
+     * @param regex  regular expression
+     */
     public default void nameMatchesPattern(String regex) {
         is(e -> e.getSimpleName().matches(regex), getElement().getSimpleName(), regex);
     }

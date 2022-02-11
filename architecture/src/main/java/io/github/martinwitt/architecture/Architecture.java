@@ -3,6 +3,7 @@ package io.github.martinwitt.architecture;
 import io.github.martinwitt.architecture.subjects.MethodSubject;
 import java.util.ArrayList;
 import java.util.List;
+import spoon.reflect.CtModel;
 import spoon.reflect.declaration.CtMethod;
 
 public class Architecture {
@@ -25,8 +26,8 @@ public class Architecture {
         }
     }
 
-    public static MethodSubject assertThat(CtMethod<?> method) {
-        return new MethodSubject(method);
+    public static MethodSubject assertThat(CtModel model, CtMethod<?> method) {
+        return new MethodSubject(model, method);
     }
 
     public static void clearExtensions() {

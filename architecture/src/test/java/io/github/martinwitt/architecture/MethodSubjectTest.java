@@ -13,7 +13,7 @@ public class MethodSubjectTest {
         System.out.println("Test running");
         // everyMethod().select(model)
         //         .forEach(method -> Architecture.assertThat(method).nameMatchesPattern("foo"));
-        everyMethod().select(model).forEach(method -> Architecture.assertThat(method)
+        everyMethod().select(model).forEach(method -> Architecture.assertThat(model, method)
                 .nameMatchesPattern("test1AAA"));
     }
 
@@ -22,7 +22,7 @@ public class MethodSubjectTest {
         System.out.println("Test running");
         // everyMethod().select(model)
         //         .forEach(method -> Architecture.assertThat(method).nameMatchesPattern("foo"));
-        everyMethod().select(model).forEach(method -> Architecture.assertThat(method)
+        everyMethod().select(model).forEach(method -> Architecture.assertThat(model, method)
                 .nameMatchesPattern(".*"));
     }
 

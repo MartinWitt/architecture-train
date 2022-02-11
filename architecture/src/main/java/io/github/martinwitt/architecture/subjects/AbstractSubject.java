@@ -2,14 +2,17 @@ package io.github.martinwitt.architecture.subjects;
 
 import io.github.martinwitt.architecture.Failure;
 import java.util.function.Predicate;
+import spoon.reflect.CtModel;
 import spoon.reflect.declaration.CtElement;
 
 public abstract class AbstractSubject<T extends CtElement> implements ISubject<T> {
 
     protected T element;
+    protected CtModel model;
 
-    protected AbstractSubject(T element) {
+    protected AbstractSubject(CtModel model, T element) {
         this.element = element;
+        this.model = model;
     }
 
     void is(Predicate<T> condition) {
