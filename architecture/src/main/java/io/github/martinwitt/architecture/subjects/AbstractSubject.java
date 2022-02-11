@@ -29,8 +29,7 @@ public abstract class AbstractSubject<T extends CtElement> {
                             .skip(1)
                             .findFirst())
                     .orElse("");
-            System.out.println(
-                    new Failure(element.getClass().getSimpleName(), checkMethod, exptectedValue, actualValue));
+            new Failure(element.getClass().getSimpleName(), checkMethod, exptectedValue, actualValue);
         }
     }
 

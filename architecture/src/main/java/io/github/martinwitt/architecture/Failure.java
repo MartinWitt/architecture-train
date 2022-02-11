@@ -12,6 +12,7 @@ public class Failure {
         this.check = check;
         this.exptected = exptected;
         this.acutal = acutal;
+        Architecture.raiseFailure(this);
     }
 
     @Override
