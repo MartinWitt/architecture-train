@@ -9,6 +9,7 @@ public abstract class AbstractSubject<T extends CtElement> implements ISubject<T
 
     protected T element;
     protected CtModel model;
+    protected boolean negate;
 
     protected AbstractSubject(CtModel model, T element) {
         this.element = element;
@@ -26,7 +27,16 @@ public abstract class AbstractSubject<T extends CtElement> implements ISubject<T
     }
 
     public void is(Predicate<T> condition, String exptectedValue, String actualValue) {
-        if (condition.negate().test(element)) {
+        if (negate) {
+            if (condition.test(element)) {
+                StackWalker walker = StackWalker.getInstance();
+                String checkMethod = walker.walk(frames -> frames.map(StackWalker.StackFrame::getMethodName)
+                                .skip(1)
+                                .findFirst())
+                        .orElse("");
+                new Failure(element.getClass().getSimpleName(), checkMethod, exptectedValue, actualValue);
+            }
+        } else if (condition.negate().test(element)) {
             StackWalker walker = StackWalker.getInstance();
             String checkMethod = walker.walk(frames -> frames.map(StackWalker.StackFrame::getMethodName)
                             .skip(1)
@@ -44,4 +54,9 @@ public abstract class AbstractSubject<T extends CtElement> implements ISubject<T
     public T getElement() {
         return element;
     }
+    /**
+     * Negates the next check. If the next check is already negated, it will be flipped back.
+     * @return  this instance
+     */
+    public abstract AbstractSubject<T> not();
 }
