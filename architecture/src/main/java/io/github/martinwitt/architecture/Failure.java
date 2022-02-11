@@ -17,14 +17,8 @@ public class Failure {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Architecture Check Failure for ")
-                .append(elementType)
-                .append(":")
-                .append("\n");
-        builder.append("Check: ").append(check).append("\n");
-        builder.append("expected: ").append(exptected).append("\n");
-        builder.append("actual: ").append(acutal).append("\n");
-        return builder.toString();
+        return String.format(
+                "Architecture Check Failure for %s:%nCheck: %s%nexpected: %s%nactual: %s%n",
+                elementType, check, exptected, acutal);
     }
 }

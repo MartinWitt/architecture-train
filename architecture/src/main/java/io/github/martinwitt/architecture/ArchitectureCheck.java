@@ -34,7 +34,6 @@ public @interface ArchitectureCheck {
         public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
                 throws ParameterResolutionException {
             ArchitectureCheck check = parameterContext.getDeclaringExecutable().getAnnotation(ArchitectureCheck.class);
-            check.modelPath();
             Launcher launcher = new Launcher();
             launcher.addInputResource(check.modelPath());
             launcher.getEnvironment().setComplianceLevel(11);
